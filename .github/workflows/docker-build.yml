@@ -100,7 +100,10 @@ jobs:
           cache: "npm"
 
       - name: Install
-        run: npm ci
+        run: npm ci --only-production
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
 
       - name: Login to DockerHub
         uses: docker/login-action@v2
