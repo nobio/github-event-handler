@@ -10,7 +10,10 @@ app.use(express.json());
 // .......................................................................
 // Endpoints
 // .......................................................................
+console.log('listening on:');
+
 app.post('/github/webhook/githubEventHandler', repoGithubEventHandler.webhook);
+console.log('/github/webhook/githubEventHandler')
 
 // .......................................................................
 // Optional fallthrough error handler
