@@ -78,6 +78,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
@@ -91,6 +92,7 @@ jobs:
             type=ref,event=branch
             type=ref,event=tag
             type=ref,event=pr
+
       - name: Github Webhook Handler ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -108,7 +110,7 @@ jobs:
 
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v3
         with:
           context: .
           push: true
