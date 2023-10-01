@@ -100,7 +100,7 @@ jobs:
           cache: "npm"
 
       - name: Install
-        run: npm ci --only-production
+        run: npm i
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
