@@ -1,3 +1,5 @@
+const { GITHUB_WEBHOOK_TRIGGER_NAME, GITHUB_WEBHOOK_TRIGGER_ACTION } = process.env;
+
 /**
  * Callback for Webhook
  * @param {*} req Request Object (to be parsed)
@@ -5,9 +7,11 @@
  */
 exports.webhook = (req, res) => {
    if (req.body.check_run) {
-      console.log(JSON.stringify(req.body.check_run.name) + " - " + req.body.action);
-   } else {
-      console.log('ignoring...')
+      if (req.body.check_run.name == GITHUB_WEBHOOK_TRIGGER_NAME && req.body.action == GITHUB_WEBHOOK_TRIGGER_ACTION) {
+         console.log('TRIGGERED!!! ' + GITHUB_WEBHOOK_TRIGGER_NAME + " " + GITHUB_WEBHOOK_TRIGGER_ACTION);
+      } else {
+         console.log('ignoring ' + JSON.stringify(req.body.check_run.name) + " - " + req.body.action);
+      }
    }
    res.status(200).send('okidokijounh');
 };
