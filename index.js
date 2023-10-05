@@ -42,7 +42,7 @@ function verifyPostData(req, res, next) {
       return next(`Request body digest (${digest}) did not match ${sigHeaderName} (${sig})`)
    }
 
-   return next()
+   return next();
 };
 
 // .......................................................................
