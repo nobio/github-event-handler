@@ -2,9 +2,10 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const bodyParser = require('body-parser');
+const crypto = require('crypto');
 require('dotenv').config();
 const repoGithubEventHandler = require('./repo_github-event-handler');
-const secret = process.env.GITHUB_WEBHOOK_SECRET;
+const { GITHUB_WEBHOOK_SECRET } = process.env;
 
 // .......................................................................
 // For these headers, a sigHashAlg of sha1 must be used instead of sha256
@@ -16,7 +17,6 @@ const sigHashAlg = 'sha256'
 
 app.set('host', process.env.IP || '0.0.0.0');
 app.set('port', process.env.PORT || '31000');
-app.use(express.json());
 
 // .......................................................................
 // Saves a valid raw JSON body to req.rawBody
@@ -36,7 +36,7 @@ function verifyPostData(req, res, next) {
    }
 
    const sig = Buffer.from(req.get(sigHeaderName) || '', 'utf8')
-   const hmac = crypto.createHmac(sigHashAlg, secret)
+   const hmac = crypto.createHmac(sigHashAlg, GITHUB_WEBHOOK_SECRET)
    const digest = Buffer.from(sigHashAlg + '=' + hmac.update(req.rawBody).digest('hex'), 'utf8')
    if (sig.length !== digest.length || !crypto.timingSafeEqual(digest, sig)) {
       return next(`Request body digest (${digest}) did not match ${sigHeaderName} (${sig})`)
