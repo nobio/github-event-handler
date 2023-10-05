@@ -4,6 +4,10 @@
  * @param {*} res Response Object (status to be set)
  */
 exports.webhook = (req, res) => {
-   console.log(JSON.stringify(req.body.check_run));
+   if (req.body.check_run.name && req.body.action) {
+      console.log(JSON.stringify(req.body.check_run.name) + " - " + req.body.action);
+   } else {
+      console.log('ignoring...')
+   }
    res.status(200).send('okidokijou');
 };
