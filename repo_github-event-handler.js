@@ -8,6 +8,7 @@ const { GITHUB_WEBHOOK_TRIGGER_NAME, GITHUB_WEBHOOK_TRIGGER_ACTION } = process.e
 exports.webhook = (req, res) => {
    if (req.body.check_run) {
       if (req.body.check_run.name == GITHUB_WEBHOOK_TRIGGER_NAME && req.body.action == GITHUB_WEBHOOK_TRIGGER_ACTION) {
+         // this is the right time to do something
          console.log('TRIGGERED!!! ' + GITHUB_WEBHOOK_TRIGGER_NAME + " " + GITHUB_WEBHOOK_TRIGGER_ACTION);
       } else {
          console.log('ignoring ' + JSON.stringify(req.body.check_run.name) + " - " + req.body.action);
