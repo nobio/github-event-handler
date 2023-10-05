@@ -1,4 +1,5 @@
 const { GITHUB_WEBHOOK_TRIGGER_NAME, GITHUB_WEBHOOK_TRIGGER_ACTION } = process.env;
+console.log('Trigger condition: "' + GITHUB_WEBHOOK_TRIGGER_NAME, GITHUB_WEBHOOK_TRIGGER_ACTION) + '"'
 
 /**
  * Callback for Webhook

@@ -49,9 +49,7 @@ function verifyPostData(req, res, next) {
 // .......................................................................
 // Endpoints
 // .......................................................................
-console.log('listening on:');
 app.post('/github/webhook/githubEventHandler', verifyPostData, repoGithubEventHandler.webhook);
-console.log('/github/webhook/githubEventHandler')
 
 // .......................................................................
 // Optional fallthrough error handler
