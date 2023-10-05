@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const http = require('http');
+require('dotenv').config();
 const repoGithubEventHandler = require('./repo_github-event-handler');
 
 app.set('host', process.env.IP || '0.0.0.0');
@@ -14,6 +15,7 @@ console.log('listening on:');
 
 app.post('/github/webhook/githubEventHandler', repoGithubEventHandler.webhook);
 console.log('/github/webhook/githubEventHandler')
+console.log(process.env.GITHUB_WEBHOOK_SECRET);
 
 // .......................................................................
 // Optional fallthrough error handler
