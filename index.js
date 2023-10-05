@@ -1,10 +1,12 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const http = require('http');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
-require('dotenv').config();
-const repoGithubEventHandler = require('./repo_github-event-handler');
+const util = require('./lib/util');
+const repoGithubEventHandler = require('./lib/repo_github-event-handler');
 const { GITHUB_WEBHOOK_SECRET } = process.env;
 
 // .......................................................................
@@ -50,6 +52,7 @@ function verifyPostData(req, res, next) {
 // Endpoints
 // .......................................................................
 app.post('/github/webhook/githubEventHandler', verifyPostData, repoGithubEventHandler.webhook);
+app.get('/github/webhook/experiment', util.experiment);
 
 // .......................................................................
 // Optional fallthrough error handler
