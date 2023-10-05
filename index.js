@@ -35,9 +35,15 @@ function verifyPostData(req, res, next) {
       return next('Request body empty')
    }
 
+   console.info('DEBUG: ' + sigHeaderName)
    const sig = Buffer.from(req.get(sigHeaderName) || '', 'utf8')
+   console.info('DEBUG: ' + sig)
+   console.info('DEBUG: ' + GITHUB_WEBHOOK_SECRET)
+
    const hmac = crypto.createHmac(sigHashAlg, GITHUB_WEBHOOK_SECRET)
    const digest = Buffer.from(sigHashAlg + '=' + hmac.update(req.rawBody).digest('hex'), 'utf8')
+   console.info('DEBUG: ' + digest)
+
    if (sig.length !== digest.length || !crypto.timingSafeEqual(digest, sig)) {
       return next(`Request body digest (${digest}) did not match ${sigHeaderName} (${sig})`)
    }
