@@ -5,5 +5,5 @@
  */
 exports.webhook = (req, res) => {
    console.table(JSON.stringify(req.body.check_run), req.body.action);
-   res.status(200).send('okidoki');
+   res.status(200).send('okidokijo');
 };
