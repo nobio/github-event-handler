@@ -12,8 +12,8 @@ const { GITHUB_WEBHOOK_SECRET } = process.env;
 // GitHub: X-Hub-Signature
 // Gogs:   X-Gogs-Signature
 // .......................................................................
-const sigHeaderName = 'X-Hub-Signature-256'
-const sigHashAlg = 'sha256'
+const sigHeaderName = 'X-Hub-Signature-256';
+const sigHashAlg = 'sha256';
 
 app.set('host', process.env.IP || '0.0.0.0');
 app.set('port', process.env.PORT || '31000');
