@@ -33,6 +33,8 @@ exports.webhook = (req, res) => {
 };
 
 /**
+ * evaluates if the trigger condition (from environment) matches the
+ * repository, job name and action coming from github webhook callback
  *
  * @param {*} req
  * @param {*} triggerCondition
