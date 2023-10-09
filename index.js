@@ -60,7 +60,7 @@ app.get('/github/webhook/experiment', util.experiment);
 app.use((err, req, res, next) => {
    if (err) console.error(err)
    res.status(403).send('Request body was not signed or verification failed')
-})
+});
 
 /* ================= start the web service on http ================= */
 const httpServer = http.createServer(app).listen(app.get('port'), app.get('host'), () => {
