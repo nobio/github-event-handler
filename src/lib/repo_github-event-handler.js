@@ -37,7 +37,7 @@ exports.webhook = (req, res) => {
  *
  * @param {*} req
  * @param {*} triggerCondition
- * @returns an object containing repo, name, status
+ * @returns an object containing repo, name, status.
  */
 function hasTriggered(req, triggerCondition) {
    const repo = req.body.repository.name
