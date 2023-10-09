@@ -40,9 +40,9 @@ exports.webhook = (req, res) => {
  * @returns an object containing repo, name, status.
  */
 function hasTriggered(req, triggerCondition) {
-   const repo = req.body.repository.name
-   const name = req.body.check_run.name
-   const status = req.body.action
+   const repo = req.body.repository.name;
+   const name = req.body.check_run.name;
+   const status = req.body.action;
 
    const trigger = `${repo}.${name}.${status}`
 
