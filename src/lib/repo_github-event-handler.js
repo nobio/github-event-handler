@@ -23,7 +23,7 @@ exports.webhook = (req, res) => {
       const triggerCondition = hasTriggered(req, triggerConditions)
       if (triggerCondition) {
          console.log(`TRIGGERED!!! ' + ${JSON.stringify(triggerCondition)}`);
-         util.execCmd('touch', [`${GITHUB_WEBHOOK_TRIGGER_TOUCH_PATH}/deply.${triggerCondition.repo}`]);
+         util.execCmd('touch', [`${GITHUB_WEBHOOK_TRIGGER_TOUCH_PATH}/deploy.${triggerCondition.repo}`]);
 
       } else {
          console.log(`ignoring ${JSON.stringify(req.body.check_run.name)} ${req.body.action}`);
