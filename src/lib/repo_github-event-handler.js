@@ -19,7 +19,6 @@ console.log(`Trigger conditions: ${triggerConditions}`);
  */
 exports.webhook = (req, res) => {
    if (req.body.check_run) {
-      //if (req.body.check_run.name == GITHUB_WEBHOOK_TRIGGER_NAME && req.body.action == GITHUB_WEBHOOK_TRIGGER_ACTION) {
       const triggerCondition = hasTriggered(req, triggerConditions)
       if (triggerCondition) {
          console.log(`TRIGGERED!!! ' + ${JSON.stringify(triggerCondition)}`);
