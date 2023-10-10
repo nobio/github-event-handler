@@ -1,0 +1,9 @@
+{
+   "action": "completed",
+   "check_run": {
+      "name": "build-arm (v16)"
+   },
+   "repository": {
+      "name": "github-event-handler"
+   }
+}
