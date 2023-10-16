@@ -1,3 +1,6 @@
+# ====================================================
+# Auth: Gernot Reichel
+# ====================================================
 HOME=/home/pi/container
 GHWH_HOME=$HOME/github-event-handler
 DOCKER_COMPOSE_HOME=/usr/local/bin
