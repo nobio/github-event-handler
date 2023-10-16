@@ -18,15 +18,23 @@ console.log(`Trigger conditions: ${triggerConditions}`);
  * @param {*} res Response Object (status to be set)
  */
 exports.execute = (req, res) => {
+   console.log(req);
+   const repo = req.body.repository.name;
+
    if (req.body.check_run) {
-      const triggerCondition = hasTriggered(req, triggerConditions)
+      const name = req.body.check_run.name;
+      const status = req.body.action;
+
+      const triggerCondition = hasTriggered(repo, name, status, triggerConditions)
       if (triggerCondition) {
-         console.log(`TRIGGERED! ' + ${triggerCondition.repo}: ${triggerCondition.name}/${triggerCondition.status}`);
+         console.log(`<${repo}> TRIGGERED ${name}/${status}`);
          util.execCmd('touch', [`${GITHUB_WEBHOOK_TRIGGER_TOUCH_PATH}/deploy.${triggerCondition.repo}`]);
 
       } else {
-         console.log(`ignoring ${JSON.stringify(req.body.check_run.name)} ${req.body.action}`);
+         console.log(`<${repo}> ignoring ${JSON.stringify(req.body.check_run.name)} ${req.body.action}`);
       }
+   } else {
+      console.log(`<${repo}> ignoring event`);
    }
    res.status(200).send();
 };
@@ -39,10 +47,7 @@ exports.execute = (req, res) => {
  * @param {*} triggerCondition
  * @returns an object containing repo, name, status.
  */
-function hasTriggered(req, triggerCondition) {
-   const repo = req.body.repository.name;
-   const name = req.body.check_run.name;
-   const status = req.body.action;
+function hasTriggered(repo, name, status, triggerCondition) {
 
    const trigger = `${repo}.${name}.${status}`
 

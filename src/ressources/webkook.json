@@ -1,6 +1,6 @@
 {
    "action": "completed",
-   "check_run": {
+   "__check_run": {
       "id": 17520743463,
       "name": "build-arm (v16)",
       "node_id": "CR_kwDOKaMhN88AAAAEFFFUJw",
