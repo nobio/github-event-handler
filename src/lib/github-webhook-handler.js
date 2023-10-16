@@ -18,7 +18,6 @@ console.log(`Trigger conditions: ${triggerConditions}`);
  * @param {*} res Response Object (status to be set)
  */
 exports.execute = (req, res) => {
-   console.log(req);
    const repo = req.body.repository.name;
 
    if (req.body.check_run) {
