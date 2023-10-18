@@ -7,7 +7,7 @@ COPY package*.json ./
 
 COPY index.js ./
 COPY src/lib/ ./src/lib/
-COPY src/bin/ ./bin/
+COPY src/bin/ ./src/bin/
 
 RUN ls --recursive
 
