@@ -3,17 +3,18 @@ FROM node:16
 # Create app directory...
 WORKDIR /usr/src/app
 
-COPY . .
-RUN rm -rf ./docker-compose.yaml
-RUN rm -rf ./.git
-RUN rm -rf ./.github
-RUN rm -rf ./.env
-RUN rm -rf ./src/ressources
+COPY package*.json ./
 
-RUN ls --recursive ./
+COPY index.js ./
+COPY ./src/lib/* ././src/lib/
+COPY src/bin/* ./src/bin/
+
+RUN ls --recursive
 
 RUN npm install --omit=dev
 
+# Bundle app source
+#COPY . .
 
 EXPOSE 31000 31000
 CMD [ "npm", "start" ]
