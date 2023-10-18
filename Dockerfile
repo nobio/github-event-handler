@@ -4,9 +4,13 @@ FROM node:16
 WORKDIR /usr/src/app
 
 COPY package*.json ./
+RUN mkdir ./src
+RUN mkdir ./src/lib
+RUN mkdir ./src/bin
+
 COPY index.js ./
-COPY src/lib ./
-COPY src/bin ./
+COPY ./src/lib/* ././src/lib/
+COPY src/bin/* ./src/bin/
 
 RUN npm install --omit=dev
 
