@@ -4,7 +4,11 @@ FROM node:16
 WORKDIR /usr/src/app
 
 COPY . .
-RUN rm -r docker-compose.yaml .git .github .env src/ressources
+RUN rm -rf ./docker-compose.yaml
+RUN rm -rf ./.git
+RUN rm -rf ./.github
+RUN rm -rf ./.env
+RUN rm -rf ./src/ressources
 
 RUN ls --recursive ./
 
