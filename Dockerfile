@@ -7,7 +7,7 @@ COPY package*.json ./
 
 COPY index.js ./
 COPY src/lib/ ./src/lib/
-COPY src/bin/ ./src/bin/
+COPY src/bin/execute-github-webhook.sh ./src/bin/
 
 RUN ls --recursive
 
