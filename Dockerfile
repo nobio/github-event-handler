@@ -1,3 +1,4 @@
+# node 16 because of compatibility reasons on arm7 platform
 FROM node:16
 
 # Create app directory...
