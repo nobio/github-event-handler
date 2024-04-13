@@ -51,8 +51,8 @@ function verifyPostData(req, res, next) {
 // .......................................................................
 // Endpoints
 // .......................................................................
-//app.post('/github/webhook', verifyPostData, githubWebhook.execute);
-app.post('/github/webhook', githubWebhook.execute);
+app.post('/github/webhook', verifyPostData, githubWebhook.execute);
+//app.post('/github/webhook', githubWebhook.execute);
 //app.get('/github/webhook/experiment', util.experiment);
 
 // .......................................................................
