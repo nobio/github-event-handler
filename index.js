@@ -6,7 +6,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const util = require('./src/lib/util');
-const githubWebhook = require('./src/lib/github-webhook-handler');
+const githubWebhook = require('./src/lib/github-webhook');
 const { GITHUB_WEBHOOK_SECRET } = process.env;
 
 // .......................................................................
@@ -51,7 +51,8 @@ function verifyPostData(req, res, next) {
 // .......................................................................
 // Endpoints
 // .......................................................................
-app.post('/github/webhook/githubEventHandler', verifyPostData, githubWebhook.execute);
+//app.post('/github/webhook', verifyPostData, githubWebhook.execute);
+app.post('/github/webhook', githubWebhook.execute);
 //app.get('/github/webhook/experiment', util.experiment);
 
 // .......................................................................

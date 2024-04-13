@@ -1,5 +1,5 @@
 const {
-   GITHUB_WEBHOOK_TRIGGER_TOUCH_PATH,
+   GITHUB_WEBHOOK_TRIGGER_ROOT_PATH,
    GITHUB_WEBHOOK_TRIGGER
 } = process.env;
 
@@ -12,12 +12,12 @@ console.log(`Trigger conditions: ${triggerConditions}`);
 /**
  * Callback for webhook
  *
- * curl -X POST -H "Content-Type: application/json" -d @./src/ressources/webkook.json -i http://localhost:31000/github/webhook/githubEventHandler
+ * curl -X POST -H "Content-Type: application/json" -d @./src/ressources/webkook.json -i http://localhost:31000/github/webhook
  *
  * @param {*} req Request Object (to be parsed)
  * @param {*} res Response Object (status to be set)
  */
-exports.execute = (req, res) => {
+exports.execute = async (req, res) => {
    const repo = req.body.repository.name;
 
    if (req.body.check_run) {
@@ -26,9 +26,9 @@ exports.execute = (req, res) => {
 
       const triggerCondition = hasTriggered(repo, name, status, triggerConditions)
       if (triggerCondition) {
-         console.log(`<${repo}> TRIGGERED ${name}/${status}`);
-         util.execCmd('touch', [`${GITHUB_WEBHOOK_TRIGGER_TOUCH_PATH}/deploy.${triggerCondition.repo}`]);
-
+         const dockerComposeYAML = `${GITHUB_WEBHOOK_TRIGGER_ROOT_PATH}/${triggerCondition.repo}/docker-compose.yaml`;
+         await util.execCmd('docker-compose', ['-f', dockerComposeYAML, 'down']);
+         await util.execCmd('docker-compose', ['-f', dockerComposeYAML, 'up', '-d']);
       } else {
          console.log(`<${repo}> ignoring ${JSON.stringify(req.body.check_run.name)} ${req.body.action}`);
       }
